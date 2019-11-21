@@ -13,12 +13,12 @@ function server_start() {
   $SERVERDIR/srcds_run -game $APPNAME $start_params
 }
 
-# Downloads/Updates the server files
+# Downloads/updates the server files
 function server_update() {
   $STEAMCMDDIR/steamcmd.sh +runscript $APPSCRIPTFILE
 }
 
-# Creates/Writes the default install-update script
+# Creates/writes the default install-update script
 function write_default_script() {
   { echo "@ShutdownOnFailedCommand 1"; \
     echo "@NoPromptForPassword 1"; \
@@ -47,7 +47,7 @@ function main() {
         fi
         server_start $start_params
       ;;
-      # Download/Updates the server files and quit
+      # Downloads/updates the server files and quit
       -u|-update) 
         server_update
       ;;
@@ -55,7 +55,7 @@ function main() {
       -to|-takeown) 
         chown -R $USER $SERVERDIR
       ;;
-      # Downloads/Updates the server files then start the server
+      # Downloads/updates the server files then start the server
       *)
         server_update
         server_start "${@:1}"
