@@ -6,7 +6,7 @@ LABEL maintainer="contact@k4rian.com"
 ENV APPID 232370
 ENV APPNAME hl2mp
 
-COPY --chown=$USER ./container_files $SERVERDIR
+COPY --chown=$USERNAME ./container_files $SERVERDIR
 
 WORKDIR $SERVERDIR
 
