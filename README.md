@@ -66,13 +66,12 @@ $ docker run -d \
 ```
 
 
-__Example 2:__                                
-Create a named volume then populate it with the *Left 4 Dead 2* Dedicated Server files:       
+__Example 2:__                                     
+Download the *Left 4 Dead 2* Dedicated Server files to a named volume for further use:
 — *The container will be deleted immediately after the task completed*             
 — *Notice the `-update` argument passed to the startup script* 
 ```
-$ docker create volume l4d2serv_data \
-  && docker run --rm \
+$ docker run --rm \
     -e APPID=222860 \
     -e APPNAME=left4dead2 \
     -v l4d2serv_data:/home/steam \
@@ -114,8 +113,7 @@ __Example 3:__
 Create a named volume then setup and run a *Team Fortress 2* Dedicated Server:              
 — *The startup script will perform a full update check on each container start* 
 ```
-$ docker create volume tf2serv_data \
-  && docker run -d \
+$ docker run -d \
     --name tf2serv \
     --net=host \
     -e APPID=232250 \
@@ -129,6 +127,26 @@ $ docker create volume tf2serv_data \
     +randommap \
     +maxplayers 24 \
     +sv_pure 1
+```
+
+
+
+## Manual build
+
+__Requirements__:                               
+— Docker >= __18.03.1__                         
+— Git *(optional)*
+
+Like any Docker image the building process is pretty straightforward. 
+
+- Clone (or download) the GitHub repository to an empty folder on your local machine:
+```
+$ git clone https://github.com/K4rian/docker-srcds.git .
+```
+
+- Then run the following command inside the newly created folder:
+```
+$ docker build --no-cache -t srcds .
 ```
 
 
