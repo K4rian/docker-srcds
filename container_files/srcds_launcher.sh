@@ -1,5 +1,7 @@
 #!/bin/bash
 
+bash "$SERVERDIR/srcds_sftp.sh"
+
 APPSCRIPT_VALIDATE=$SERVERDIR/srcds_appscript_validate.txt
 APPSCRIPT_UPDATE=$SERVERDIR/srcds_appscript_update.txt
 

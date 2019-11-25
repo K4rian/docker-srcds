@@ -12,6 +12,29 @@ COPY --chown=steam ./container_files /home/steam/gameserver
 
 WORKDIR $SERVERDIR
 
-RUN chmod 755 srcds_launcher.sh
+RUN chmod 755 *.sh
+
+# SFTP
+ENV SFTP_ENABLE 0
+ENV SFTP_PWD NONE
+ENV SFTP_PORT 50451
+ENV SFTP_MAX_AUTH_TRIES 3
+ENV SFTP_MAX_SESSIONS 1
+
+USER root
+
+RUN set -x \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+        sudo=1.8.27-1+deb10u1 \
+        openssh-server=1:7.9p1-10+deb10u1 \
+    && chown -R $USERNAME /etc/ssh \
+    && { echo "${USERNAME}   ALL=(ALL:ALL) ALL"; \
+         echo "${USERNAME}   ALL=NOPASSWD:/etc/init.d/ssh"; \
+         echo "${USERNAME}   ALL=NOPASSWD:/usr/sbin/chpasswd"; \
+       } >> /etc/sudoers \
+    && service sudo restart
+
+USER $USERNAME
 
 ENTRYPOINT ["./srcds_launcher.sh"]
