@@ -11,6 +11,15 @@ This image is used to setup and run any __Source Dedicated Server__ including *C
 
 
 
+## Variants
+
+The `srcds` image comes in two variants:
+
+- :__[latest](https://github.com/K4rian/docker-srcds/tree/master)__ — the base image.
+- :[sftp](https://github.com/K4rian/docker-srcds/tree/sftp) — the base image with SFTP support added.
+
+
+
 ## Environment variables
 
 Two environment variables must be tweaked when creating a container depending on which game server has to be installed:
